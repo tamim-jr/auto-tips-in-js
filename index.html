@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Auto pips in js</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<style>
+    body {
+        text-align: center;
+        margin-top: 150px;
+    }
+
+    #auto-tips {
+        font-size: 25px;
+        font-family: sans-serif;
+        font-weight: 700;
+    }
+</style>
+
+<body>
+    <h2>Get your daily auto tips in here</h2>
+    <p id="auto-tips"></p>
+    <button type="button" onClick="window.location.reload()">Refresh</button>
+
+    <script>
+        function autoAPI() {
+            fetch("http://www.boredapi.com/api/activity/")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("auto-tips").innerText = data.activity;
+                });
+        }
+        autoAPI();
+        setInterval(() => {
+            autoAPI();
+        }, 5000);
+    </script>
+</body>
+
+</html>
